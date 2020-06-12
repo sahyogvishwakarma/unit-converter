@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Conversion</title>
+    <style>
+        table, tr, th, td {
+            vertical-align: middle;
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+        td.input{
+            padding: 0;
+        }
+        input{
+            margin: 0;
+            border: 0;
+            padding: 5px;
+            outline: none;
+            text-decoration: none;
+            min-width: 1px;
+        }
+        td:child{
+            padding: none;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <th>Input Unit</th>
+            <th>Input Data</th>
+            <th>mm</th>
+            <th>cm</th>
+            <th>meter</th>
+            <th>inches</th>
+            <th>feet</th>
+        </tr>
+        <tr id="mm">
+            <th>mm</th>
+            <td class="input"><input type="number"  value="0" pattern="[0-9]{1,}[.0-9]{0,}" oninput="myFunction(this,this.value)">
+            </td>
+            <td class="op1">0</td>
+            <td class="op1">0</td>
+            <td class="op1">0</td>
+            <td class="op1">0</td>
+            <td class="op1">0</td>
+        </tr>
+        <tr id="cm">
+            <th>cm</th>
+            <td class="input"><input type="number"  value="0" pattern="[0-9]{1,}[.0-9]{0,}" oninput="myFunction(this,this.value)">
+            </td>
+            <td class="op2">0</td>
+            <td class="op2">0</td>
+            <td class="op2">0</td>
+            <td class="op2">0</td>
+            <td class="op2">0</td>
+        </tr>
+        <tr id="m">
+            <th>m</th>
+            <td class="input"><input type="number"  value="0" pattern="[0-9]{1,}[.0-9]{0,}" oninput="myFunction(this,this.value)">
+            </td>
+            <td class="op3">0</td>
+            <td class="op3">0</td>
+            <td class="op3">0</td>
+            <td class="op3">0</td>
+            <td class="op3">0</td>
+        </tr>
+        <tr id="inch">
+            <th>inch</th>
+            <td class="input"><input type="number"  value="0" pattern="[0-9]{1,}[.0-9]{0,}" oninput="myFunction(this,this.value)">
+            </td>
+            <td class="op4">0</td>
+            <td class="op4">0</td>
+            <td class="op4">0</td>
+            <td class="op4">0</td>
+            <td class="op4">0</td>
+        </tr>
+        <tr id="feet">
+            <th>feet</th>
+            <td class="input"><input type="number"  value="0" pattern="[0-9]{1,}[.0-9]{0,}" oninput="myFunction(this,this.value)">
+            </td>
+            <td class="op5">0</td>
+            <td class="op5">0</td>
+            <td class="op5">0</td>
+            <td class="op5">0</td>
+            <td class="op5">0</td>
+        </tr>
+    </table>
+</body>
+<script>
+function myFunction(inputID, inputValue )
+{
+    inputValue = Number(inputValue).isNaN?0:Number(inputValue);
+    inputID = inputID.parentElement.parentElement.id;
+    var mm = 0.0, cm = 0.0, m = 0.0, inch = 0.0, feet = 0.0;
+    var op1 = document.getElementsByClassName("op1");
+    var op2 = document.getElementsByClassName("op2");
+    var op3 = document.getElementsByClassName("op3");
+    var op4 = document.getElementsByClassName("op4");
+    var op5 = document.getElementsByClassName("op5");
+    if (inputID == "mm"){
+        mm = inputValue;
+        cm = inputValue / 10;
+        m = inputValue / 1000;
+        inch = inputValue / 25.4;
+        feet = inputValue / (25.4 * 12);
+        op1[0].innerHTML = mm.toFixed(4);
+        op1[1].innerHTML = cm.toFixed(4);
+        op1[2].innerHTML = m.toFixed(4);
+        op1[3].innerHTML = inch.toFixed(4);
+        op1[4].innerHTML = feet.toFixed(4);
+    } else if (inputID == "cm"){
+        mm = inputValue * 10;
+        cm = inputValue;
+        m = inputValue / 100;
+        inch = inputValue / 2.54;
+        feet = inputValue / (2.54 * 12);
+        op2[0].innerHTML = mm.toFixed(4);
+        op2[1].innerHTML = cm.toFixed(4);
+        op2[2].innerHTML = m.toFixed(4);
+        op2[3].innerHTML = inch.toFixed(4);
+        op2[4].innerHTML = feet.toFixed(4);
+    } else if (inputID == "m") {
+        mm = inputValue * 1000;
+        cm = inputValue * 100;
+        m = inputValue;
+        inch = (inputValue * 1000) / 25.4;
+        feet = (inputValue * 1000) / (25.4 * 12);
+        op3[0].innerHTML = mm.toFixed(4);
+        op3[1].innerHTML = cm.toFixed(4);
+        op3[2].innerHTML = m.toFixed(4);
+        op3[3].innerHTML = inch.toFixed(4);
+        op3[4].innerHTML = feet.toFixed(4);
+    } else if (inputID == "inch") {
+        mm = inputValue * 25.4;
+        cm = inputValue * 2.54;
+        m = inputValue * 0.0254;
+        inch = inputValue;
+        feet = inputValue / 12;
+        op4[0].innerHTML = mm.toFixed(4);
+        op4[1].innerHTML = cm.toFixed(4);
+        op4[2].innerHTML = m.toFixed(4);
+        op4[3].innerHTML = inch.toFixed(4);
+        op4[4].innerHTML = feet.toFixed(4);
+    } else if (inputID == "feet") {
+        mm = inputValue * 12 * 25.4;
+        cm = inputValue * 12 * 2.54;
+        m = inputValue * 12 * 0.0254;
+        inch = inputValue * 12;
+        feet = inputValue;
+        op5[0].innerHTML = mm.toFixed(4);
+        op5[1].innerHTML = cm.toFixed(4);
+        op5[2].innerHTML = m.toFixed(4);
+        op5[3].innerHTML = inch.toFixed(4);
+        op5[4].innerHTML = feet.toFixed(4);
+    }
+}
+</script>
+
+</html>
